@@ -10,39 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_09_143659) do
+ActiveRecord::Schema.define(version: 2018_05_10_121811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "Streets", id: false, force: :cascade do |t|
+  create_table "bookings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "items_id"
+    t.date "started_at"
+    t.date "endet_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "beach", id: :integer, default: nil, force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
+    t.integer "user_id"
     t.string "name"
-    t.integer "price"
-  end
-
-  create_table "cars", id: :integer, default: nil, force: :cascade do |t|
-    t.string "name", limit: 20
-    t.integer "price"
-  end
-
-  create_table "computers", id: :integer, default: nil, force: :cascade do |t|
-    t.string "name", limit: 20
-    t.string "price", limit: 20
-  end
-
-  create_table "person", id: :integer, default: nil, force: :cascade do |t|
-    t.string "name", limit: 20
-    t.string "last_name", limit: 20
-    t.integer "room"
-  end
-
-  create_table "streets", id: :integer, default: nil, force: :cascade do |t|
-    t.string "name", limit: 20
-    t.string "last_name", limit: 20
-    t.integer "room"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
