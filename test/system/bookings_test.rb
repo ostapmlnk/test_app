@@ -14,8 +14,8 @@ class BookingsTest < ApplicationSystemTestCase
     visit bookings_url
     click_on "New Booking"
 
-    fill_in "Endet On", with: @booking.endet_on
-    fill_in "Items", with: @booking.items_id
+    fill_in "Ended On", with: @booking.ended_on
+    fill_in "Item", with: @booking.item_id
     fill_in "Started At", with: @booking.started_at
     fill_in "User", with: @booking.user_id
     click_on "Create Booking"
@@ -28,8 +28,8 @@ class BookingsTest < ApplicationSystemTestCase
     visit bookings_url
     click_on "Edit", match: :first
 
-    fill_in "Endet On", with: @booking.endet_on
-    fill_in "Items", with: @booking.items_id
+    fill_in "Ended On", with: @booking.ended_on
+    fill_in "Item", with: @booking.item_id
     fill_in "Started At", with: @booking.started_at
     fill_in "User", with: @booking.user_id
     click_on "Update Booking"

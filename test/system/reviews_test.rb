@@ -14,9 +14,9 @@ class ReviewsTest < ApplicationSystemTestCase
     visit reviews_url
     click_on "New Review"
 
+    fill_in "Message", with: @review.message
     fill_in "Reviewable", with: @review.reviewable_id
     fill_in "Reviewable Type", with: @review.reviewable_type
-    fill_in "Text", with: @review.text
     fill_in "User", with: @review.user_id
     click_on "Create Review"
 
@@ -28,9 +28,9 @@ class ReviewsTest < ApplicationSystemTestCase
     visit reviews_url
     click_on "Edit", match: :first
 
+    fill_in "Message", with: @review.message
     fill_in "Reviewable", with: @review.reviewable_id
     fill_in "Reviewable Type", with: @review.reviewable_type
-    fill_in "Text", with: @review.text
     fill_in "User", with: @review.user_id
     click_on "Update Review"
 

@@ -14,7 +14,6 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_on "New User"
 
-    fill_in "Email", with: @user.email
     fill_in "Name", with: @user.name
     click_on "Create User"
 
@@ -26,7 +25,6 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_on "Edit", match: :first
 
-    fill_in "Email", with: @user.email
     fill_in "Name", with: @user.name
     click_on "Update User"
 

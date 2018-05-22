@@ -5,17 +5,5 @@
   <%= @user.name %>
 </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-
-<strong>Reviews:</strong>
-<% @user.reviews.each do |reviews| %></br>
-  <%= "» " %><%= reviews.text %>
-<% end %>
-<br>
-
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

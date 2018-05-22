@@ -2,12 +2,12 @@
 
 one:
   user_id: 1
-  items_id: 1
-  started_at: 2018-05-10
-  endet_on: 2018-05-10
+  item_id: 1
+  started_at: 2018-05-15
+  ended_on: 2018-05-15
 
 two:
   user_id: 1
-  items_id: 1
-  started_at: 2018-05-10
-  endet_on: 2018-05-10
+  item_id: 1
+  started_at: 2018-05-15
+  ended_on: 2018-05-15

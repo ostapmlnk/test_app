@@ -17,7 +17,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create booking" do
     assert_difference('Booking.count') do
-      post bookings_url, params: { booking: { endet_on: @booking.endet_on, items_id: @booking.items_id, started_at: @booking.started_at, user_id: @booking.user_id } }
+      post bookings_url, params: { booking: { ended_on: @booking.ended_on, item_id: @booking.item_id, started_at: @booking.started_at, user_id: @booking.user_id } }
     end
 
     assert_redirected_to booking_url(Booking.last)
@@ -34,7 +34,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update booking" do
-    patch booking_url(@booking), params: { booking: { endet_on: @booking.endet_on, items_id: @booking.items_id, started_at: @booking.started_at, user_id: @booking.user_id } }
+    patch booking_url(@booking), params: { booking: { ended_on: @booking.ended_on, item_id: @booking.item_id, started_at: @booking.started_at, user_id: @booking.user_id } }
     assert_redirected_to booking_url(@booking)
   end
 

@@ -1,20 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @item.user_id %>
-</p>
-
-<p>
   <strong>Name:</strong>
   <%= @item.name %>
 </p>
 
-<strong>Reviews:</strong>
-<% @item.reviews.each do |reviews| %></br>
-  <%= "» " %><%= reviews.text %>
-<% end %>
-<br>
+<p>
+  <strong>User:</strong>
+  <%= @item.user_id %>
+</p>
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

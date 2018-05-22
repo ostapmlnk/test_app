@@ -1,3 +1,4 @@
 class Item < ApplicationRecord
-  has_many :reviews, :as => :reviewable
+  belongs_to :user
+  has_many :reviews, as: :reviewable
 end
