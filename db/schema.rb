@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_16_091114) do
+ActiveRecord::Schema.define(version: 2018_05_22_154429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,12 +37,14 @@ ActiveRecord::Schema.define(version: 2018_05_16_091114) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "item_id"
     t.date "started_at"
     t.date "ended_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "item_id"
+    t.bigint "user_id"
+    t.index ["item_id"], name: "index_bookings_on_item_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -53,27 +55,33 @@ ActiveRecord::Schema.define(version: 2018_05_16_091114) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "city_id"
-    t.index ["user_id"], name: "fki_user_id_fkey"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
-    t.text "message"
-    t.string "reviewable_type"
+    t.string "text"
     t.integer "reviewable_id"
+    t.string "reviewable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "city_id"
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_users_on_city_id"
   end
 
+  add_foreign_key "bookings", "items"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "items", "users"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "users", "cities"
 end
