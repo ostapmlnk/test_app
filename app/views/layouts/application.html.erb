@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Testg</title>
+    <title>Test_app</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= link_to "Home", root_path %>
+    <%= link_to "Users", users_path %>
+    <%= link_to "Items", items_path %>
+    <%= link_to "Booking", bookings_path %>
+    <%= link_to "City", cities_path %>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
