@@ -2,11 +2,23 @@
 
 <h1>Items</h1>
 
+<%= form_tag items_path, method: :get, role: 'search' do %>
+  <%= text_field_tag :name, params[:name] %>
+  <%= submit_tag "Search", name: nil %>
+<% end %>
+
+<h3>Результаты поиска по запросу <em><%= params[:name]%></em></h3>
+<% @search_results.each do |result| %>
+  <hr>
+  <h4><%= link_to result.name, result %></h4>
+<% end %>
+
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>User</th>
+      <th>Category</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,12 +27,22 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= item.name %></td>
-        <td><%= item.user_id %></td>
+        <td>
+          <% if item.user.present? %>
+            <%= item.user.name %>
+          <% end %>
+        </td>
+        <td>
+          <% if item.category.present? %>
+            <%= item.category.name %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <hr>
     <%= will_paginate @items %>
   </tbody>
 </table>

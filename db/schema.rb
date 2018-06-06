@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_22_154429) do
+ActiveRecord::Schema.define(version: 2018_06_06_132120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,10 +47,31 @@ ActiveRecord::Schema.define(version: 2018_05_22_154429) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "categories_filters", id: false, force: :cascade do |t|
+    t.bigint "category_id"
+    t.bigint "filter_id"
+    t.index ["category_id"], name: "index_categories_filters_on_category_id"
+    t.index ["filter_id"], name: "index_categories_filters_on_filter_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "filters", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "filters_values", force: :cascade do |t|
+    t.string "option"
+    t.bigint "filter_id"
+    t.index ["filter_id"], name: "index_filters_values_on_filter_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -58,7 +79,25 @@ ActiveRecord::Schema.define(version: 2018_05_22_154429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "items_filters_values", id: false, force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "filters_value_id"
+    t.index ["filters_value_id"], name: "index_items_filters_values_on_filters_value_id"
+    t.index ["item_id"], name: "index_items_filters_values_on_item_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -81,6 +120,8 @@ ActiveRecord::Schema.define(version: 2018_05_22_154429) do
 
   add_foreign_key "bookings", "items"
   add_foreign_key "bookings", "users"
+  add_foreign_key "filters_values", "filters"
+  add_foreign_key "items", "categories"
   add_foreign_key "items", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "users", "cities"

@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+    @search_results = Item.search_everywhere(params[:name])
     @items = Item.paginate(page: params[:page], per_page: 5)
   end
 
@@ -69,6 +70,8 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :user_id)
+      params.require(:item).permit(:name, :user_id, :category_id)
     end
+
+
 end
